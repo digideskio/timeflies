@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+  <title>Time Flies</title>
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/timeflies.css" rel="stylesheet">
+  <script src="js/jquery-2.0.3.min.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/timeflies.js"></script>
+</head>
+<body ng-app="timeflies">
+  <div class="container">
+    <div class="page-header" ng-controller="HeaderCtrl">
+      <h1>Time Flies <small>{{clock | date: 'yyyy/MM/dd HH:mm'}}</small></h1>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2 menubar" ng-controller="MenuCtrl">
+        <div class="list-group">
+          <a href="#" class="list-group-item">
+            Export TODO data
+          </a>
+          <a href="#" class="list-group-item">
+            Import TODO data
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-10">
+        <h3 class="header">(Countdown) Timer</h3>
+
+        <div class="row" ng-controller="TimerCtrl">
+          <div class="col-lg-2">
+            <div class="well well-sm">{{timeString}}</div>
+          </div>
+          <div class="col-lg-2">
+            <div class="radio">
+              <label>
+                <input type="radio" name="timer" id="time" value="time" checked ng-click="countup()">
+                Timer
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="timer" id="countdown" value="countdown" ng-click="countdown()">
+                Countdown
+              </label>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="btn-toolbar">
+              <div class="btn-group btn-group-lg">
+                <button type="button" ng-class="{disabled: started, btn: true, 'btn-primary': true}" ng-click="start()">Start</button>
+                <button type="button" class="btn btn-primary" ng-click="stop()">Stop</button>
+                <button type="button" class="btn btn-primary" ng-click="reset()">Reset</button>
+              </div>
+              <div class="btn-group btn-group-sm">
+                <button type="button" class="btn btn-default" ng-click="add(60)">+1m</button>
+                <button type="button" class="btn btn-default" ng-click="add(5 * 60)">+5m</button>
+                <button type="button" class="btn btn-default" ng-click="add(10 * 60)">+10m</button>
+                <button type="button" class="btn btn-default" ng-click="add(15 * 60)">+15m</button>
+                <button type="button" class="btn btn-default" ng-click="add(30 * 60)">+30m</button>
+                <button type="button" class="btn btn-default" ng-click="add(60 * 60)">+60m</button>
+                <button type="button" class="btn btn-default" ng-click="add(5 * 60 * 60)">+5h</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <fieldset>
+              <legend>Alarm</legend>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="alarm" value="alarm1" checked ng-click="setAlarm(0)">
+                  Alarm 1
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="alarm" value="alarm2" ng-click="setAlarm(1)">
+                  Alarm 2
+                </label>
+              </div>
+              <button type="button" class="btn btn-warning" ng-click="toggleAlarm()">Turn {{onOff}}</button>
+              <button type="button" class="btn btn-warning" ng-click="stopAlarm()">Stop</button>
+            </fieldset>
+          </div>
+        </div>
+
+        <h3 class="header">Todo</h3>
+        <div class="row" ng-controller="TodoCtrl">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
